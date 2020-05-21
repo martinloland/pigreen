@@ -29,6 +29,10 @@ You can now use mkvirtualenv
 
 ## Start server
 
+sudo flask run -h 0.0.0.0 --port 80
+
+*Not working:*
+
 export FLASK_APP=server.py
 
 flask run
