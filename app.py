@@ -1,14 +1,25 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, render_template, request
 from .util import get_config, write_config
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return str(get_config())
+    return render_template('index.html', config=get_config())
 
-@app.route('/set/<component>/<int:setting>')
-def setter(component, setting):
-    write_config({component: bool(setting)})
+@app.route('/set/<component>/<setting>/<type_>')
+def setter(component, setting, type_):
+    parser = {
+        'int': int, 
+        'float': float, 
+        'bool': lambda v: bool(int(v))
+    }.get(type_, str)
+    write_config({component: parser(setting)})
+    return redirect(url_for('index'), code=302)
+
+@app.route('/post', methods=["GET", "POST"])
+def post():
+    data = {k: v for k, v in request.form.items()}
+    write_config(data)
     return redirect(url_for('index'), code=302)
 
 if __name__ == '__main__':
