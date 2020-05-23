@@ -1,1 +1,12 @@
-{"light": false, "pump": false, "light_setting": "on", "pump_setting": "on", "light_start": "01:00", "light_end": "22:00", "pump_interval": "5", "pump_length": "1"}
+{
+  "last_loop": "2020-05-23 12:01:25.160174",
+  "light": true,
+  "light_end": "23:00",
+  "light_setting": "auto",
+  "light_start": "08:00",
+  "pump": false,
+  "pump_interval": "3",
+  "pump_last_on": 1590227976.411762,
+  "pump_length": "1",
+  "pump_setting": "auto"
+}

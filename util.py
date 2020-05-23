@@ -7,4 +7,4 @@ def get_config():
 def write_config(options):
     d = get_config()
     with open('config.json', 'w') as f:
-        json.dump({**d, **options}, f)
+        json.dump({**d, **options}, f, indent=2, sort_keys=True)
