@@ -13,8 +13,9 @@ Greenhouse front and backend on raspberry pi
 
 ## Virtualenv
 
-sudo pip3 install virtualenv virtualenvwrapper=='4.8.4'
+`sudo pip3 install virtualenv virtualenvwrapper=='4.8.4'`
 
+```
 nano ~/.bashrc # and add:
 
 VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
@@ -24,6 +25,7 @@ export WORKON_HOME=~/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 
 source ~/.bashrc
+```
 
 You can now use mkvirtualenv
 
@@ -34,18 +36,22 @@ https://www.circuitbasics.com/how-to-set-up-the-dht11-humidity-sensor-on-the-ras
 
 ## Rpi.GPIO
 
-sudo apt-get -y install python3-rpi.gpio
+`sudo apt-get -y install python3-rpi.gpio`
 
 ## Screen
 
 https://raspi.tv/2012/using-screen-with-raspberry-pi-to-avoid-leaving-ssh-sessions-open
 
+`sudo apt-get install screen`
+
+Start new: `screen bash`
+
+Detach: `CTRL + A` then `D`
+
+View: `screen -list`
+
+Reconnect: `screen -r 1245.pts-0.raspberrypi`
+
 ## Start server
 
-sudo flask run -h 0.0.0.0 --port 80
-
-*Not working:*
-
-export FLASK_APP=server.py
-
-flask run
+`sudo flask run -h 0.0.0.0 -p 80`
