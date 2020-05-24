@@ -26,10 +26,18 @@ def main():
 
 def set_relay(relays):
     config = get_config()
-    relays.output(relay=1, value=True)
-    relays.output(relay=2, value=True)
-    relays.output(relay=3, value=False)
-    relays.output(relay=4, value=False)
+    relays.output(
+        relay=config["channel_light"], 
+        value=config["light"]
+    )
+    relays.output(
+        relay=config["channel_pump"], 
+        value=config["pump"]
+    )
+    relays.output(
+        relay=config["channel_fan"], 
+        value=config["fan"]
+    )
 
 
 def get_environment():

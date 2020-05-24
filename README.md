@@ -36,6 +36,10 @@ https://www.circuitbasics.com/how-to-set-up-the-dht11-humidity-sensor-on-the-ras
 
 sudo apt-get -y install python3-rpi.gpio
 
+## Screen
+
+https://raspi.tv/2012/using-screen-with-raspberry-pi-to-avoid-leaving-ssh-sessions-open
+
 ## Start server
 
 sudo flask run -h 0.0.0.0 --port 80
