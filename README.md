@@ -27,6 +27,10 @@ source ~/.bashrc
 
 You can now use mkvirtualenv
 
+## DHT
+
+https://www.circuitbasics.com/how-to-set-up-the-dht11-humidity-sensor-on-the-raspberry-pi/
+
 ## Start server
 
 sudo flask run -h 0.0.0.0 --port 80

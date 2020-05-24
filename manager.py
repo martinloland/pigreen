@@ -24,8 +24,8 @@ def get_environment():
         pin=4
     )
     return {
-        "humidity": humidity,
-        "temperature": temperature,
+        "humidity": round(humidity, 3),
+        "temperature": round(temperature, 3),
     }
 
 
