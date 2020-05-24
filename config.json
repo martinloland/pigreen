@@ -1,4 +1,7 @@
 {
+  "channel_light": 1,
+  "channel_pump": 2,
+  "channel_fan": 3,
   "last_loop": "2020-05-23 12:01:55.336573",
   "light": true,
   "light_end": "23:00",
