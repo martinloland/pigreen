@@ -52,6 +52,12 @@ View: `screen -list`
 
 Reconnect: `screen -r 1245.pts-0.raspberrypi`
 
+Terminate: `CTRL + D`
+
 ## Start server
 
 `sudo flask run -h 0.0.0.0 -p 80`
+
+## Start manager
+
+`sudo python manager.py`
