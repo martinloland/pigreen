@@ -27,15 +27,15 @@ def main():
 def set_relay(relays):
     config = get_config()
     relays.output(
-        relay=config["channel_light"], 
+        relay=int(config["channel_light"]), 
         value=config["light"]
     )
     relays.output(
-        relay=config["channel_pump"], 
+        relay=int(config["channel_pump"]), 
         value=config["pump"]
     )
     relays.output(
-        relay=config["channel_fan"], 
+        relay=int(config["channel_fan"]), 
         value=config["fan"]
     )
 
