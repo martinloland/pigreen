@@ -7,21 +7,20 @@ from relay import Relays
 
 
 def main():
-    relays = Relays()
-
-    while True:
-        now = dt.datetime.now()
-        config = get_config()
-        write_config({
-            **get_light(config=config, now=now),
-            **get_pump(config=config, now=now),
-            **get_fan(config=config, now=now),
-            **get_environment(),
-            "last_loop": str(now)
-        })
-        set_relay(relays=relays)
-        write_log(config=config)
-        time.sleep(1)
+    with Relays() as relays:
+        while True:
+            now = dt.datetime.now()
+            config = get_config()
+            write_config({
+                **get_light(config=config, now=now),
+                **get_pump(config=config, now=now),
+                **get_fan(config=config, now=now),
+                **get_environment(),
+                "last_loop": str(now)
+            })
+            set_relay(relays=relays)
+            write_log(config=config)
+            time.sleep(1)
 
 
 def set_relay(relays):
