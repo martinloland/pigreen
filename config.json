@@ -1,5 +1,5 @@
 {
-  "last_loop": "2020-05-23 12:01:33.193433",
+  "last_loop": "2020-05-23 12:01:55.336573",
   "light": true,
   "light_end": "23:00",
   "light_setting": "auto",
@@ -8,5 +8,10 @@
   "pump_interval": "3",
   "pump_last_on": 1590227976.411762,
   "pump_length": "1",
-  "pump_setting": "auto"
+  "pump_setting": "auto",
+  "fan": false,
+  "fan_interval": "3",
+  "fan_last_on": 1590227976.411762,
+  "fan_length": "1",
+  "fan_setting": "auto",
 }
