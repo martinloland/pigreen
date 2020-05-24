@@ -24,6 +24,7 @@ class Relays(object):
 
     def __exit__(self, *a):
         GPIO.cleanup()
+        print('GPIO cleaned up')
 
     def output(self, relay, value):
         "relay=int 1-4, value=True/False"
