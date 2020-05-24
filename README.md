@@ -31,6 +31,11 @@ You can now use mkvirtualenv
 
 https://www.circuitbasics.com/how-to-set-up-the-dht11-humidity-sensor-on-the-raspberry-pi/
 
+
+## Rpi.GPIO
+
+sudo apt-get -y install python3-rpi.gpio
+
 ## Start server
 
 sudo flask run -h 0.0.0.0 --port 80

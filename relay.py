@@ -10,7 +10,6 @@ class Relays(object):
             3: {'status':False, 'bcm':20}, # 20
             4: {'status':False, 'bcm':16}, # 21
         }
-        self.setup()
 
     def pin(self, relay):
         return self.relays[relay]['bcm']
@@ -20,7 +19,7 @@ class Relays(object):
         GPIO.setup([self.pin(relay) for relay in self.relays], GPIO.OUT, initial=GPIO.HIGH)
 
     def __enter__(self):
-        pass
+        self.setup()
 
     def __exit__(self, *a):
         GPIO.cleanup()
