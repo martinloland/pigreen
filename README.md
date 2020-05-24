@@ -61,3 +61,7 @@ Terminate: `CTRL + D`
 ## Start manager
 
 `sudo python manager.py`
+
+## WiFi Strength
+
+` sudo iwlist wlan0 scan | egrep "Cell|ESSID|Signal|Rates"`
