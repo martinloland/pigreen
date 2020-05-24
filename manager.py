@@ -3,9 +3,12 @@ from pathlib import Path
 import time
 import Adafruit_DHT
 from util import get_config, write_config
+from relay import Relays
 
 
 def main():
+    relays = Relays()
+
     while True:
         now = dt.datetime.now()
         config = get_config()
@@ -16,8 +19,17 @@ def main():
             **get_environment(),
             "last_loop": str(now)
         })
+        set_relay(relays=relays)
         write_log(config=config)
         time.sleep(1)
+
+
+def set_relay(relays):
+    config = get_config()
+    relays.output(relay=1, value=True)
+    relays.output(relay=2, value=True)
+    relays.output(relay=3, value=False)
+    relays.output(relay=4, value=False)
 
 
 def get_environment():
