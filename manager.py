@@ -9,7 +9,6 @@ from relay import Relays
 def main():
     relays = Relays()
     with relays:
-        print(relays)
         while True:
             now = dt.datetime.now()
             config = get_config()
@@ -26,7 +25,6 @@ def main():
 
 
 def set_relay(relays):
-    print(relays)
     config = get_config()
     relays.output(relay=1, value=True)
     relays.output(relay=2, value=True)
