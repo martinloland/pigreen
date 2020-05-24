@@ -1,5 +1,6 @@
 import datetime as dt
 import time
+import Adafruit_DHT
 from util import get_config, write_config
 
 
@@ -10,9 +11,22 @@ def main():
         write_config({
             **get_light(config=config, now=now),
             **get_pump(config=config, now=now),
+            **get_environment(),
             "last_loop": str(now)
         })
-        time.sleep(1)
+        print(get_config())
+        time.sleep(10)
+
+
+def get_environment():
+    humidity, temperature = Adafruit_DHT.read_retry(
+        sensor=Adafruit_DHT.AM2302,
+        pin=4
+    )
+    return {
+        "humidity": humidity,
+        "temperature": temperature,
+    }
 
 
 def get_pump(config, now):
