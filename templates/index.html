@@ -22,6 +22,12 @@
     <a href="/set/pump_setting/off/str">Off</a>
     <a href="/set/pump_setting/auto/str">Auto</a>
 </p>
+<p>
+    Fan: 
+    <a href="/set/fan_setting/on/str">On</a>
+    <a href="/set/fan_setting/off/str">Off</a>
+    <a href="/set/fan_setting/auto/str">Auto</a>
+</p>
 
 <form action="/post" method="post">
     Light Start:
@@ -35,6 +41,15 @@
     <br>
     Pump length:
     <input name="pump_length" value="{{config.pump_length}}" /> Minutes
+    <br>
+    Fan interval:
+    <input name="fan_interval" value="{{config.fan_interval}}" /> Minutes
+    <br>
+    Fan length:
+    <input name="fan_length" value="{{config.fan_length}}" /> Minutes
+    <br>
+    Logging interval:
+    <input name="pump_length" value="{{config.logging_interval}}" /> Minutes
     <br>
     <input type="submit" value="Set"/>
 </form>

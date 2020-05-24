@@ -4,6 +4,8 @@
   "light_end": "23:00",
   "light_setting": "auto",
   "light_start": "08:00",
+  "logging_last": 1590341638.88656,
+  "logging_interval": "1",
   "pump": false,
   "pump_interval": "3",
   "pump_last_on": 1590227976.411762,

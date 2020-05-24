@@ -1,4 +1,5 @@
 import datetime as dt
+from pathlib import Path
 import time
 import Adafruit_DHT
 from util import get_config, write_config
@@ -11,11 +12,12 @@ def main():
         write_config({
             **get_light(config=config, now=now),
             **get_pump(config=config, now=now),
+            **get_fan(config=config, now=now),
             **get_environment(),
             "last_loop": str(now)
         })
-        print(get_config())
-        time.sleep(10)
+        write_log(config=config)
+        time.sleep(1)
 
 
 def get_environment():
@@ -29,6 +31,20 @@ def get_environment():
     }
 
 
+def write_log(config):
+    interval = dt.timedelta(minutes=int(config["logging_interval"]))
+    logging_last = dt.datetime.fromtimestamp(config["logging_last"])
+    log = Path("log.txt")
+    if not log.is_file():
+        with open(log, "w+") as f:
+            f.write(", ".join([str(k) for k, v in config.items()]))
+            f.write("\n")
+    if dt.datetime.now() - logging_last > interval:
+        with open(log, 'a+') as f:
+            f.write(", ".join([str(v) for k, v in config.items()]))
+            f.write('\n')
+
+
 def get_pump(config, now):
     d = {}
     if config["pump_setting"] == 'auto':
@@ -37,12 +53,10 @@ def get_pump(config, now):
         last_on = dt.datetime.fromtimestamp(config["pump_last_on"])
         on = config["pump"]
         if all([last_on + interval <= now, not on]):
-            # print("on", str(now))
             d.update({
                 "pump": True, "pump_last_on": now.timestamp()
             })
         elif all([now - last_on > length, on]):
-            # print("off", str(now))
             d.update({
                 "pump": False
             })
@@ -50,6 +64,29 @@ def get_pump(config, now):
         d["pump"] = True
     elif config["pump_setting"] == 'off':
         d["pump"] = False
+
+    return d
+
+
+def get_fan(config, now):
+    d = {}
+    if config["fan_setting"] == 'auto':
+        interval = dt.timedelta(minutes=int(config["fan_interval"]))
+        length = dt.timedelta(minutes=int(config["fan_length"]))
+        last_on = dt.datetime.fromtimestamp(config["fan_last_on"])
+        on = config["fan"]
+        if all([last_on + interval <= now, not on]):
+            d.update({
+                "fan": True, "fan_last_on": now.timestamp()
+            })
+        elif all([now - last_on > length, on]):
+            d.update({
+                "fan": False
+            })
+    elif config["fan_setting"] == 'on':
+        d["fan"] = True
+    elif config["fan_setting"] == 'off':
+        d["fan"] = False
 
     return d
 
