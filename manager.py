@@ -8,7 +8,7 @@ from relay import Relays
 
 def main():
     relays = Relays()
-    with relays as relays:
+    with relays:
         print(relays)
         while True:
             now = dt.datetime.now()
