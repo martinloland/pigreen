@@ -43,11 +43,12 @@ def set_relay(relays):
 def get_environment():
     humidity, temperature = Adafruit_DHT.read_retry(
         sensor=Adafruit_DHT.AM2302,
-        pin=4
+        pin=4,
+        retries=5,
     )
     return {
-        "humidity": round(humidity, 3),
-        "temperature": round(temperature, 3),
+        "humidity": 0 if not humidity else round(humidity, 3),
+        "temperature": 0 if not temperature else round(temperature, 3),
     }
 
 
