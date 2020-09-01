@@ -64,4 +64,9 @@ Terminate: `CTRL + D`
 
 ## WiFi Strength
 
-` sudo iwlist wlan0 scan | egrep "Cell|ESSID|Signal|Rates"`
+`sudo iwlist wlan0 scan | egrep "Cell|ESSID|Signal|Rates"`
+
+### Debug mode in develop
+
+`set FLASK_ENV=development`
+`flask run`

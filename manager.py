@@ -2,7 +2,7 @@ import datetime as dt
 from pathlib import Path
 import time
 import Adafruit_DHT
-from util import get_config, write_config
+from util import get_config, write_config, free_drive_space
 from relay import Relays
 
 
@@ -17,7 +17,8 @@ def main():
                 **get_pump(config=config, now=now),
                 **get_fan(config=config, now=now),
                 **get_environment(),
-                "last_loop": str(now)
+                "last_loop": str(now),
+                "free_drive_space": free_drive_space(as_string=True)
             })
             set_relay(relays=relays)
             write_log(config=config)
