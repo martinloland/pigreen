@@ -1,5 +1,6 @@
 backend/dist/*
 .vscode
+config.json
 
 # Created by https://www.gitignore.io/api/vue,python,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=vue,python,visualstudiocode

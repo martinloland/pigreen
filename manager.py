@@ -17,7 +17,7 @@ def main():
                 **get_pump(config=config, now=now),
                 **get_fan(config=config, now=now),
                 **get_environment(),
-                "last_loop": str(now),
+                "last_loop": now.timestamp(),
                 "free_drive_space": free_drive_space(as_string=True)
             })
             set_relay(relays=relays)
