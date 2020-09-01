@@ -17,11 +17,12 @@ def main():
                 **get_pump(config=config, now=now),
                 **get_fan(config=config, now=now),
                 **get_environment(),
+                **write_log(config=config, now=now),
                 "last_loop": now.timestamp(),
                 "free_drive_space": free_drive_space(as_string=True)
             })
             set_relay(relays=relays)
-            write_log(config=config)
+            
             time.sleep(1)
 
 
@@ -53,18 +54,23 @@ def get_environment():
     }
 
 
-def write_log(config):
+def write_log(config, now):
+    d = {}
     interval = dt.timedelta(minutes=int(config["logging_interval"]))
     logging_last = dt.datetime.fromtimestamp(config["logging_last"])
+    config.update({"time": now.timestamp()})
     log = Path("log.txt")
     if not log.is_file():
         with open(log, "w+") as f:
             f.write(", ".join([str(k) for k, v in config.items()]))
             f.write("\n")
+        d.update({"logging_last": now.timestamp()})
     if dt.datetime.now() - logging_last > interval:
         with open(log, 'a+') as f:
             f.write(", ".join([str(v) for k, v in config.items()]))
             f.write('\n')
+        d.update({"logging_last": now.timestamp()})
+    return d
 
 
 def get_pump(config, now):
