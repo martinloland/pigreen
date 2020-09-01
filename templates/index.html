@@ -1,64 +1,164 @@
-<!doctype html>
-<title>Pigreen</title>
-<h1>Settings</h1>
-<table>
-    {% for key, value in config.items() %}
-    <tr>
-        <td><b>{{key}}</b></td> <td>{{value}}</td>
-    </tr>
-    {% endfor %}
-
-</table>
-<h1>Configuration</h1>
-<p>
-    Light: 
-    <a href="/set/light_setting/on/str">On</a>
-    <a href="/set/light_setting/off/str">Off</a>
-    <a href="/set/light_setting/auto/str">Auto</a>
-</p>
-<p>
-    Pump: 
-    <a href="/set/pump_setting/on/str">On</a>
-    <a href="/set/pump_setting/off/str">Off</a>
-    <a href="/set/pump_setting/auto/str">Auto</a>
-</p>
-<p>
-    Fan: 
-    <a href="/set/fan_setting/on/str">On</a>
-    <a href="/set/fan_setting/off/str">Off</a>
-    <a href="/set/fan_setting/auto/str">Auto</a>
-</p>
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h1>Status</h1>
+    <div class="row">
+        <div class="col-sm-6 col-md-4 p-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Temperature</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{config.temperature}}<sup>&deg;</sup>C</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 p-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Humidity</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{config.humidity}} %</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 p-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Free drive space</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{config.free_drive_space}}</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 p-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Last loop</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{config.last_loop|arrow}}</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 p-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Last pump</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{config.pump_last_on|arrow}}</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 p-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Last fan</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{config.fan_last_on|arrow}}</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 p-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Last logging</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{config.logging_last|arrow}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-4">
+    <h1>Configuration</h1>
+    <div class="row">
+        <div class="col-sm-6 col-md-4 p-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Light</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{config.light_setting}}</h6>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-primary" href="/set/light_setting/on/str">On</a>
+                        <a class="btn btn-primary" href="/set/light_setting/off/str">Off</a>
+                        <a class="btn btn-primary" href="/set/light_setting/auto/str">Auto</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 p-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Pump</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{config.pump_setting}}</h6>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-primary" href="/set/pump_setting/on/str">On</a>
+                        <a class="btn btn-primary" href="/set/pump_setting/off/str">Off</a>
+                        <a class="btn btn-primary" href="/set/pump_setting/auto/str">Auto</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 p-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Fan</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{config.fan_setting}}</h6>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-primary" href="/set/fan_setting/on/str">On</a>
+                        <a class="btn btn-primary" href="/set/fan_setting/off/str">Off</a>
+                        <a class="btn btn-primary" href="/set/fan_setting/auto/str">Auto</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <form action="/post" method="post">
-    Light Start:
-    <input name="light_start" value="{{config.light_start}}" />
-    <br>
-    Light End:
-    <input name="light_end" value="{{config.light_end}}" />
-    <br>
-    Pump interval:
-    <input name="pump_interval" value="{{config.pump_interval}}" /> Minutes
-    <br>
-    Pump length:
-    <input name="pump_length" value="{{config.pump_length}}" /> Minutes
-    <br>
-    Fan interval:
-    <input name="fan_interval" value="{{config.fan_interval}}" /> Minutes
-    <br>
-    Fan length:
-    <input name="fan_length" value="{{config.fan_length}}" /> Minutes
-    <br>
-    Logging interval:
-    <input name="pump_length" value="{{config.logging_interval}}" /> Minutes
-    <br>
-    Channel light:
-    <input type="number" name="channel_light" value="{{config.channel_light}}" /> Minutes
-    <br>
-    Channel pump:
-    <input type="number" name="channel_pump" value="{{config.channel_pump}}" /> Minutes
-    <br>
-    Channel fan:
-    <input type="number" name="channel_fan" value="{{config.channel_fan}}" /> Minutes
-    <br>
-    <input type="submit" value="Set"/>
+    <div class="container">
+        <div class="form-row">
+            <div class="col-sm-6 p-2">
+                <label>Light Start</label>
+                <input class="form-control" name="light_start" value="{{config.light_start}}" />
+            </div>
+            <div class="col-sm-6 p-2">
+                <label>Light End</label>
+                <input class="form-control" name="light_end" value="{{config.light_end}}" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-sm-6 p-2">
+                <label>Pump Interval (min)</label>
+                <input class="form-control" name="pump_interval" value="{{config.pump_interval}}" />
+            </div>
+            <div class="col-sm-6 p-2">
+                <label>Pump Length (min)</label>
+                <input class="form-control" name="pump_length" value="{{config.pump_length}}" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-sm-6 p-2">
+                <label>Fan Interval (min)</label>
+                <input class="form-control" name="fan_interval" value="{{config.fan_interval}}" />
+            </div>
+            <div class="col-sm-6 p-2">
+                <label>Fan Length (min)</label>
+                <input class="form-control" name="fan_length" value="{{config.fan_length}}" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-sm-6 p-2">
+                <label>Logging Interval (min)</label>
+                <input class="form-control" name="logging_interval" value="{{config.logging_interval}}" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-sm-3 p-2">
+                <label>Channel light</label>
+                <input class="form-control" name="channel_light" value="{{config.channel_light}}" />
+            </div>
+            <div class="col-sm-3 p-2">
+                <label>Channel pump</label>
+                <input class="form-control" name="channel_pump" value="{{config.channel_pump}}" />
+            </div>
+            <div class="col-sm-3 p-2">
+                <label>Channel fan</label>
+                <input class="form-control" name="channel_fan" value="{{config.channel_fan}}" />
+            </div>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Set" />
+    </div>
 </form>
+{% endblock %}
