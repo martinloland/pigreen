@@ -64,7 +64,6 @@ def write_log(config, now):
         with open(log, "w+") as f:
             f.write(", ".join([str(k) for k, v in config.items()]))
             f.write("\n")
-        d.update({"logging_last": now.timestamp()})
     if dt.datetime.now() - logging_last > interval:
         with open(log, 'a+') as f:
             f.write(", ".join([str(v) for k, v in config.items()]))
