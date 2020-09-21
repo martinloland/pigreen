@@ -54,6 +54,14 @@
         <div class="col-sm-6 col-md-4 p-2">
             <div class="card">
                 <div class="card-body">
+                    <h5 class="card-title">Last breeze</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{config.fan_breeze_on|arrow}}</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 p-2">
+            <div class="card">
+                <div class="card-body">
                     <h5 class="card-title">Last logging</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{config.logging_last|arrow}}</h6>
                 </div>
@@ -103,6 +111,19 @@
                 </div>
             </div>
         </div>
+        <div class="col-sm-6 col-md-4 p-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Breeze</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{config.breeze_setting}}</h6>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-primary" href="/set/breeze_setting/on/str">On</a>
+                        <a class="btn btn-primary" href="/set/breeze_setting/off/str">Off</a>
+                        <a class="btn btn-primary" href="/set/breeze_setting/auto/str">Auto</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -140,6 +161,16 @@
         </div>
         <div class="form-row">
             <div class="col-sm-6 p-2">
+                <label>Breeze Interval (min)</label>
+                <input class="form-control" name="breeze_interval" value="{{config.breeze_interval}}" />
+            </div>
+            <div class="col-sm-6 p-2">
+                <label>Breeze Length (min)</label>
+                <input class="form-control" name="breeze_length" value="{{config.breeze_length}}" />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-sm-6 p-2">
                 <label>Logging Interval (min)</label>
                 <input class="form-control" name="logging_interval" value="{{config.logging_interval}}" />
             </div>
@@ -156,6 +187,10 @@
             <div class="col-sm-3 p-2">
                 <label>Channel fan</label>
                 <input class="form-control" name="channel_fan" value="{{config.channel_fan}}" />
+            </div>
+            <div class="col-sm-3 p-2">
+                <label>Channel breeze</label>
+                <input class="form-control" name="channel_breeze" value="{{config.channel_breeze}}" />
             </div>
         </div>
         <input class="btn btn-primary" type="submit" value="Set" />

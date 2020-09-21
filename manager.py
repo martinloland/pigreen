@@ -14,8 +14,9 @@ def main():
             config = get_config()
             write_config({
                 **get_light(config=config, now=now),
-                **get_pump(config=config, now=now),
-                **get_fan(config=config, now=now),
+                **get_interval_relay(config=config, now=now, relay="pump"),
+                **get_interval_relay(config=config, now=now, relay="fan"),
+                **get_interval_relay(config=config, now=now, relay="breeze"),
                 **get_environment(),
                 **write_log(config=config, now=now),
                 "last_loop": now.timestamp(),
@@ -39,6 +40,10 @@ def set_relay(relays):
     relays.output(
         relay=int(config["channel_fan"]), 
         value=config["fan"]
+    )
+    relays.output(
+        relay=int(config["channel_breeze"]), 
+        value=config["breeze"]
     )
 
 
@@ -72,48 +77,25 @@ def write_log(config, now):
     return d
 
 
-def get_pump(config, now):
+def get_interval_relay(config, now, relay):
     d = {}
-    if config["pump_setting"] == 'auto':
-        interval = dt.timedelta(minutes=int(config["pump_interval"]))
-        length = dt.timedelta(minutes=int(config["pump_length"]))
-        last_on = dt.datetime.fromtimestamp(config["pump_last_on"])
-        on = config["pump"]
+    if config[f"{relay}_setting"] == 'auto':
+        interval = dt.timedelta(minutes=int(config[f"{relay}_interval"]))
+        length = dt.timedelta(minutes=int(config[f"{relay}_length"]))
+        last_on = dt.datetime.fromtimestamp(config[f"{relay}_last_on"])
+        on = config[relay]
         if all([last_on + interval <= now, not on]):
             d.update({
-                "pump": True, "pump_last_on": now.timestamp()
+                relay: True, f"{relay}_last_on": now.timestamp()
             })
         elif all([now - last_on > length, on]):
             d.update({
-                "pump": False
+                f"{relay}": False
             })
-    elif config["pump_setting"] == 'on':
-        d["pump"] = True
-    elif config["pump_setting"] == 'off':
-        d["pump"] = False
-
-    return d
-
-
-def get_fan(config, now):
-    d = {}
-    if config["fan_setting"] == 'auto':
-        interval = dt.timedelta(minutes=int(config["fan_interval"]))
-        length = dt.timedelta(minutes=int(config["fan_length"]))
-        last_on = dt.datetime.fromtimestamp(config["fan_last_on"])
-        on = config["fan"]
-        if all([last_on + interval <= now, not on]):
-            d.update({
-                "fan": True, "fan_last_on": now.timestamp()
-            })
-        elif all([now - last_on > length, on]):
-            d.update({
-                "fan": False
-            })
-    elif config["fan_setting"] == 'on':
-        d["fan"] = True
-    elif config["fan_setting"] == 'off':
-        d["fan"] = False
+    elif config[f"{relay}_setting"] == 'on':
+        d[relay] = True
+    elif config[f"{relay}_setting"] == 'off':
+        d[relay] = False
 
     return d
 

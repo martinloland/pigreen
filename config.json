@@ -21,5 +21,10 @@
   "pump_last_on": 1598992336,
   "pump_length": "1",
   "pump_setting": "on",
+  "breeze": false,
+  "breeze_interval": "3",
+  "breeze_last_on": 1598992336,
+  "breeze_length": "1",
+  "breeze_setting": "on",
   "temperature": 25.9
 }
